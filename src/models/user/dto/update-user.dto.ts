@@ -93,11 +93,13 @@ export class UpdateUserDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   exerciseFrequency: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   exerciseDuration: number;
 
   @ApiProperty({ enum: UserRole, required: false })
@@ -119,26 +121,31 @@ export class UpdateUserDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   height: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   weight: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   bmi: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   goalWeight: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   age: number;
 
   @ApiProperty({ required: false })
