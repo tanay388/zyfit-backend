@@ -74,7 +74,6 @@ export class UserService {
       bodyShape: updateUserDto.bodyShape,
       requiredBodyShape: updateUserDto.requiredBodyShape,
       workoutPlace: updateUserDto.workoutPlace,
-      workOutPlace: updateUserDto.workOutPlace,
       muscleGroups: updateUserDto.muscleGroups,
       exerciseLevel: updateUserDto.exerciseLevel,
       exerciseFrequency: updateUserDto.exerciseFrequency,

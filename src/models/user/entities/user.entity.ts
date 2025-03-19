@@ -145,13 +145,6 @@ export class User extends BaseEntity {
   workoutPlace: WorkoutPlaces;
 
   @Column({
-    type: 'enum',
-    enum: WorkoutPlaces,
-    nullable: true,
-  })
-  workOutPlace: WorkoutPlaces;
-
-  @Column({
     type: 'simple-array',
     nullable: true,
   })

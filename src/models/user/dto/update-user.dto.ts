@@ -74,10 +74,6 @@ export class UpdateUserDto {
   @IsEnum(WorkoutPlaces)
   workoutPlace: WorkoutPlaces;
 
-  @ApiProperty({ enum: WorkoutPlaces, required: false })
-  @IsOptional()
-  @IsEnum(WorkoutPlaces)
-  workOutPlace: WorkoutPlaces;
 
   @ApiProperty({ type: [String], enum: MuscleGroups, required: false })
   @IsOptional()
