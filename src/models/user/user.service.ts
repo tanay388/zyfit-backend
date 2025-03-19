@@ -53,7 +53,7 @@ export class UserService {
 
   async updateProfile(
     fUser: FirebaseUser,
-    { name, gender, birthDate, phone }: UpdateUserDto,
+    updateUserDto: UpdateUserDto,
     photo?: Express.Multer.File,
   ) {
     const { uid, email } = fUser;
@@ -65,10 +65,28 @@ export class UserService {
 
     await User.update(uid, {
       photo: path,
-      name,
-      gender,
-      email,
-      phone,
+      name: updateUserDto.name,
+      gender: updateUserDto.gender,
+      email: updateUserDto.email,
+      phone: updateUserDto.phone,
+      ageGroup: updateUserDto.ageGroup,
+      primaryGoal: updateUserDto.primaryGoal,
+      bodyShape: updateUserDto.bodyShape,
+      requiredBodyShape: updateUserDto.requiredBodyShape,
+      workoutPlace: updateUserDto.workoutPlace,
+      workOutPlace: updateUserDto.workOutPlace,
+      muscleGroups: updateUserDto.muscleGroups,
+      exerciseLevel: updateUserDto.exerciseLevel,
+      exerciseFrequency: updateUserDto.exerciseFrequency,
+      exerciseDuration: updateUserDto.exerciseDuration,
+      professionGroup: updateUserDto.professionGroup,
+      height: updateUserDto.height,
+      weight: updateUserDto.weight,
+      bmi: updateUserDto.bmi,
+      goalWeight: updateUserDto.goalWeight,
+      isActive: updateUserDto.isActive,
+      issueMuscleGroups: updateUserDto.issueMuscleGroups,
+      age: updateUserDto.age,
     });
 
     return this.getProfile(fUser);
