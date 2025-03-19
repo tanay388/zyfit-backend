@@ -107,11 +107,11 @@ export class UpdateUserDto {
   @IsEnum(UserRole)
   role: UserRole;
 
-  @ApiProperty({ type: [String], enum: MuscleGroups, required: false })
-  @IsOptional()
-  @IsArray()
-  @IsEnum(MuscleGroups, { each: true })
-  issueMuscleGroups: MuscleGroups[];
+  // @ApiProperty({ type: [String], enum: MuscleGroups, required: false })
+  // @IsOptional()
+  // @IsArray()
+  // @IsEnum(MuscleGroups, { each: true })
+  // issueMuscleGroups: MuscleGroups[];
 
   @ApiProperty({ enum: ProfessionGroups, required: false })
   @IsOptional()

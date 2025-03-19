@@ -84,8 +84,7 @@ export class UserService {
       weight: updateUserDto.weight,
       bmi: updateUserDto.bmi,
       goalWeight: updateUserDto.goalWeight,
-      isActive: updateUserDto.isActive,
-      issueMuscleGroups: updateUserDto.issueMuscleGroups,
+      // issueMuscleGroups: updateUserDto.issueMuscleGroups,
       age: updateUserDto.age,
     });
 
