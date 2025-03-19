@@ -8,6 +8,8 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   OneToMany,
+  BeforeUpdate,
+  BeforeInsert,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { NotificationToken } from 'src/providers/notification/entities/notificationToken.entity';
@@ -21,6 +23,51 @@ export enum Gender {
   male = 'Male',
   female = 'Female',
   preferNotToSay = 'Prefer not to say',
+}
+
+export enum UserAgeGroup {
+  age18_29 = '18-29',
+  age30_39 = '30-39',
+  age40_49 = '40-49',
+  age50 = '50+',
+}
+
+export enum PrimaryGoal {
+  build_muscle = 'Build Muscle',
+  loose_weight = 'Lose Weight & Shed Fat',
+  improve_fitness = 'Improve Fitness',
+}
+
+export enum BodyShapes {
+  slim = 'Slim',
+  average = 'Average',
+  athletic = 'Athletic',
+  muscular = 'Muscular',
+  bodybuilder = 'Bodybuilder',
+  heavy = 'Heavy',
+}
+
+export enum WorkoutPlaces {
+  gym = 'Gym',
+  home = 'Home',
+  both = 'Both',
+}
+
+export enum MuscleGroups {
+  chest = 'Chest',
+  back = 'Back',
+  legs = 'Legs',
+  arms = 'Arms',
+  shoulders = 'Shoulders',
+  abs = 'Abs',
+  cardio = 'Cardio',
+  all = 'All',
+}
+
+export enum ProfessionGroups {
+  officeWorker = 'Sedentry',
+  fieldWorker = 'Mostly Active',
+  athletic = 'Athletic',
 }
 
 @Entity()
@@ -55,13 +102,6 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   email: string;
 
-  @Column({ nullable: true })
-  birthDate: Date;
-
-  @Exclude()
-  @Column({ nullable: true })
-  stripeId?: string;
-
   @Column({
     type: 'enum',
     enum: Gender,
@@ -69,10 +109,73 @@ export class User extends BaseEntity {
   })
   gender: Gender;
 
+  @Column({
+    type: 'enum',
+    enum: UserAgeGroup,
+    nullable: true,
+  })
+  ageGroup: UserAgeGroup;
+
+  @Column({
+    type: 'enum',
+    enum: PrimaryGoal,
+    nullable: true,
+  })
+  primaryGoal: PrimaryGoal;
+
+  @Column({
+    type: 'enum',
+    enum: BodyShapes,
+    nullable: true,
+  })
+  bodyShape: BodyShapes;
+
+  @Column({
+    type: 'enum',
+    enum: BodyShapes,
+    nullable: true,
+  })
+  requiredBodyShape: BodyShapes;
+
+  @Column({
+    type: 'enum',
+    enum: WorkoutPlaces,
+    nullable: true,
+  })
+  workoutPlace: WorkoutPlaces;
+
+  @Column({
+    type: 'enum',
+    enum: WorkoutPlaces,
+    nullable: true,
+  })
+  workOutPlace: WorkoutPlaces;
+
+  @Column({
+    type: 'simple-array',
+    nullable: true,
+  })
+  muscleGroups: MuscleGroups[];
+
+  @Column({
+    nullable: true,
+  })
+  exerciseLevel: string;
+
+  @Column({
+    nullable: true,
+  })
+  exerciseFrequency: number;
+
+  @Column({
+    nullable: true,
+  })
+  exerciseDuration: number;
+
   @Exclude()
   @Column({
     type: 'enum',
-    enum: ['user', 'admin'],
+    enum: UserRole,
     default: 'user',
   })
   role: UserRole;
@@ -80,10 +183,61 @@ export class User extends BaseEntity {
   @OneToMany(() => NotificationToken, (nt) => nt.user, { onDelete: 'CASCADE' })
   notificationTokens: NotificationToken[];
 
-  toReturnJson() {
-    const { id, name, email, phone, photo, role, birthDate } = this;
+  @Column({
+    type: 'simple-array',
+    nullable: true,
+  })
+  issueMuscleGroups: MuscleGroups[];
 
-    return { id, name, email, phone, photo, role, birthDate };
+  @Column({
+    type: 'enum',
+    enum: ProfessionGroups,
+    nullable: true,
+  })
+  professionGroup: ProfessionGroups;
+
+  @Column({
+    nullable: true,
+  })
+  height: number;
+
+  @Column({
+    nullable: true,
+  })
+  weight: number;
+
+  @Column({
+    nullable: true,
+  })
+  bmi: number;
+
+  @Column({
+    nullable: true,
+  })
+  goalWeight: number;
+
+  @Column({
+    nullable: true,
+  })
+  age: number;
+
+  @Column({
+    nullable: true,
+  })
+  isActive: boolean;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  calculate_bmi() {
+    if (this.height && this.weight) {
+      this.bmi = this.weight / (this.height * this.height);
+    }
+  }
+
+  toReturnJson() {
+    const { id, name, email, phone, photo, role, ageGroup } = this;
+
+    return { id, name, email, phone, photo, role, ageGroup };
   }
 
   withJWT(jwtService: JwtService) {
@@ -95,5 +249,27 @@ export class User extends BaseEntity {
         role: this.role,
       }),
     };
+  }
+
+  toAIFormatedPrompt() {
+    return `
+    User Proflie: 
+    - Gender: ${this.gender}
+    - Age Group: ${this.ageGroup}
+    - Primary Goal: ${this.primaryGoal}
+    - Body Shape: ${this.bodyShape}
+    - Required Body Shape: ${this.requiredBodyShape}
+    - Workout Place: ${this.workoutPlace}
+    - Workout Place: ${this.workoutPlace}
+    - Focus Muscle Groups: ${this.muscleGroups}
+    - Exercise Level: ${this.exerciseLevel}
+    - Exercise Frequency: ${this.exerciseFrequency}
+    - Exercise Duration: ${this.exerciseDuration}
+    - Profession Group: ${this.professionGroup}
+    - Height: ${this.height}
+    - Weight: ${this.weight}
+    - BMI: ${this.bmi}
+    - Goal Weight: ${this.goalWeight}
+    `;
   }
 }

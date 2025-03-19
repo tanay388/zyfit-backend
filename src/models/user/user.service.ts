@@ -67,7 +67,6 @@ export class UserService {
       photo: path,
       name,
       gender,
-      birthDate,
       email,
       phone,
     });
