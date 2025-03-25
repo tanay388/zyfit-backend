@@ -6,19 +6,19 @@ export class Exercise extends BaseClassEntity {
   @Column({ type: 'varchar', length: 255 })
   exerciseId: string;
 
-  @Column({ type: 'varchar', length: 255 }) 
+  @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', length: 100, nullable: true })
   force: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', length: 100, nullable: true })
   level: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true }) 
+  @Column({ type: 'varchar', length: 100, nullable: true })
   mechanic: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', length: 100, nullable: true })
   equipment: string;
 
   @Column({ type: 'simple-array' })

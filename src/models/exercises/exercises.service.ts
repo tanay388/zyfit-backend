@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { Exercise } from './entities/exercise.entity';
 
 @Injectable()
 export class ExercisesService {
@@ -9,7 +11,7 @@ export class ExercisesService {
   }
 
   findAll() {
-    return `This action returns all exercises`;
+    return Exercise.find();
   }
 
   findOne(id: number) {
@@ -22,5 +24,31 @@ export class ExercisesService {
 
   remove(id: number) {
     return `This action removes a #${id} exercise`;
+  }
+
+  // @Cron(CronExpression.EVERY_10_HOURS)
+  async syncExercises() {
+    const exercisesRawList = await fetch(
+      'https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/dist/exercises.json',
+    );
+
+    const exercises = await exercisesRawList.json();
+
+    const mappedExercises = exercises.map((exercise) => {
+      const { id, ...exerciseWithoutId } = exercise;
+      return {
+        ...exerciseWithoutId,
+        exerciseId: id,
+        images: exercise.images.map(
+          (image) =>
+            `https://raw.githubusercontent.com/yuhonas/free-exercise-db/refs/heads/main/exercises/${image}`,
+        ),
+      };
+    });
+
+    // Save to database
+    await Exercise.save(mappedExercises);
+
+    return mappedExercises;
   }
 }
