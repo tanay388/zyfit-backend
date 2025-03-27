@@ -1,34 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ExercisesService } from './exercises.service';
-import { CreateExerciseDto } from './dto/create-exercise.dto';
-import { UpdateExerciseDto } from './dto/update-exercise.dto';
+import { FirebaseSecure } from '../user/decorator/firebase.secure.decorator';
+import { FUser } from '../user/decorator/firebase.user.decorator';
+import { FirebaseUser } from 'src/providers/firebase/firebase.service';
 
 @Controller('exercises')
+@FirebaseSecure()
 export class ExercisesController {
   constructor(private readonly exercisesService: ExercisesService) {}
-
-  @Post()
-  create(@Body() createExerciseDto: CreateExerciseDto) {
-    return this.exercisesService.create(createExerciseDto);
-  }
 
   @Get()
   findAll() {
     return this.exercisesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.exercisesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateExerciseDto: UpdateExerciseDto) {
-    return this.exercisesService.update(+id, updateExerciseDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.exercisesService.remove(+id);
+  @Post('generate-plan')
+  generatePlan(@FUser() user: FirebaseUser) {
+    return this.exercisesService.generatePlan(user);
   }
 }

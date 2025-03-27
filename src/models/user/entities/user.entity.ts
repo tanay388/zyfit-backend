@@ -70,6 +70,12 @@ export enum ProfessionGroups {
   athletic = 'Athletic',
 }
 
+export enum WorkoutLevel {
+  beginner = 'Beginner',
+  intermediate = 'Intermediate',
+  advanced = 'Advanced',
+}
+
 @Entity()
 export class User extends BaseEntity {
   static from(partial: Partial<User>): User {
