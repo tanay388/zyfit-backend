@@ -71,9 +71,9 @@ export enum ProfessionGroups {
 }
 
 export enum WorkoutLevel {
-  beginner = 'Beginner',
-  intermediate = 'Intermediate',
-  advanced = 'Advanced',
+  beginner = 'beginner',
+  intermediate = 'intermediate',
+  advanced = 'advanced',
 }
 
 @Entity()
