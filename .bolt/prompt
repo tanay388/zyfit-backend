@@ -1,0 +1,109 @@
+You are an expert backend AI engineer working on a personalized health and diet recommendation system. Your task is to design, architect, and implement a highly scalable, secure, and efficient backend using NestJS (Node.js framework), Firebase (authentication & analytics), PostgreSQL (database), and AI APIs (DeepSeek, OpenAI, Gemini) for workout and meal planning.
+
+Tech Stack:
+Framework: NestJS (TypeScript-based, modular, scalable)
+
+Database: PostgreSQL (Structured, relational, optimized for queries)
+
+Authentication: Firebase Admin (Email, Google, Apple sign-in)
+
+File Storage: Firebase Storage (Meal/Workout images, user uploads)
+
+AI API: DeepSeek/OpenAI/Gemini (For AI-driven recommendations)
+
+Deployment: Docker + Kubernetes (Scalability), DigitalOcean/AWS (Cloud hosting)
+
+Caching: Redis (For session & fast query performance)
+
+Logging & Monitoring: Firebase Analytics + Prometheus
+
+Key Functional Requirements:
+The backend must support:
+
+✅ User Data Collection
+
+Accepts inputs: height, weight, activity level, fitness goal, location (city/state), dietary preferences, dietary restrictions, past progress
+
+Stores user workout history, diet preferences, calorie intake trends, and feedback
+
+✅ Workout Plan Generation (AI + Database-Driven)
+
+Fetch workout routines (with videos & instructions) from PostgreSQL
+
+AI generates personalized 7-day workout plan based on user profile
+
+Auto-adjusts future plans based on performance & feedback
+
+Supports exercise variations (home/gym workouts, no equipment)
+
+✅ Diet Plan Generation (AI + PostgreSQL)
+
+Fetch meal data (calories, macros, recipe video links) from PostgreSQL
+
+AI generates daily meal plan (breakfast, lunch, dinner, pre-workout meal)
+
+Meal recommendations are seasonal & state-specific
+
+Uses Firebase Storage for images & videos
+
+Calculates macros & calories dynamically
+
+✅ Real-Time Tracking & Analytics
+
+Track user engagement & progress via Firebase Analytics
+
+Store workout logs & dietary intake
+
+Enable market trend analysis for future expansion
+
+✅ Gym Owner Subscription Model
+
+Partner gyms pay per active user (attendance-based billing)
+
+Auto-generate invitations for gym members
+
+Gym dashboard to onboard 1K-2K users easily
+
+Track attendance & engagement metrics
+
+✅ Scalability & Optimization
+
+Use Redis caching to improve AI response times
+
+Queue-based async processing for AI-heavy tasks
+
+Implement role-based access control (RBAC) & JWT authentication
+
+AI API Workflow:
+Data Preprocessing:
+
+Fetch structured workout & meal data from PostgreSQL
+
+Apply user preferences & restrictions
+
+Format data for AI API input
+
+AI Request (DeepSeek/OpenAI/Gemini)
+
+Pass user profile + past history + database-fetched data
+
+Generate optimized weekly workout & meal plan
+
+Return structured JSON output
+
+Post-Processing & Storage
+
+Store AI results in PostgreSQL (workout & meal tables)
+
+Save user interaction history
+
+Serve responses via GraphQL/REST APIs
+
+Security & Compliance:
+GDPR & HIPAA Compliance (Secure user data storage)
+
+Rate-limiting & DDoS protection
+
+Encrypted data storage (AES256)
+
+Role-based access for gym owners vs. users
