@@ -43,7 +43,6 @@ export class AIService {
   private readonly apiUrl = 'https://api.deepseek.com/v1/chat/completions';
 
   constructor(
-    private configService: ConfigService,
     private httpService: HttpService,
   ) {
     this.apiKey = process.env.DEEPSEEK_API_KEY;

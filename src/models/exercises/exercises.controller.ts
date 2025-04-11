@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { ExercisesService } from './exercises.service';
 import { FirebaseSecure } from '../user/decorator/firebase.secure.decorator';
 import { FUser } from '../user/decorator/firebase.user.decorator';

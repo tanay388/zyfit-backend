@@ -14,6 +14,7 @@ import { NotificationModule } from './providers/notification/notification.module
 import { FirebaseUserMiddlewareExtractor } from './models/user/middleware/firebaseUserMiddlewareExtractor';
 import { ExercisesModule } from './models/exercises/exercises.module';
 import { AIModule } from './providers/ai/ai.module';
+import { DietModule } from './models/diet/diet.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { AIModule } from './providers/ai/ai.module';
     UserModule,
     ExercisesModule,
     AIModule,
+    DietModule,
   ],
   controllers: [AppController],
   providers: [AppService],

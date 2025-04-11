@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { NotificationToken } from 'src/providers/notification/entities/notificationToken.entity';
+import { MealType } from 'src/models/diet/entities/diet.entity';
 
 export enum UserRole {
   user = 'user',
@@ -98,6 +99,12 @@ export class User extends BaseEntity {
 
   @Column({ nullable: true })
   name: string;
+
+  @Column({nullable: true})
+  dietryPreference: MealType
+
+  @Column({nullable: true})
+  city: string;
 
   @Column({ nullable: true })
   photo: string;

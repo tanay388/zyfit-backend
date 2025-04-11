@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { SignUpUserDto } from './signup-user.dto';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsEmail,
   IsEnum,
@@ -22,12 +22,27 @@ import {
   ProfessionGroups,
   UserRole,
 } from '../entities/user.entity';
+import { Diet, MealType } from 'src/models/diet/entities/diet.entity';
 
 export class UpdateUserDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
   name: string;
+
+  @ApiPropertyOptional({
+    
+  })
+  @IsOptional()
+  @IsEnum(MealType)
+  dietryPreference: MealType;
+
+  @ApiPropertyOptional({
+
+  })
+  @IsOptional()
+  @IsString()
+  city: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
