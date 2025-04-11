@@ -45,26 +45,6 @@ export class UserController {
   @Patch('/')
   @ApiOperation({ summary: 'Update user profile' })
   @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        name: { type: 'string', nullable: true },
-        birthDate: { type: 'string', format: 'date-time', nullable: true },
-        gender: {
-          type: 'string',
-          enum: Object.values(Gender),
-          nullable: true,
-        },
-        phone: { type: 'string', nullable: true },
-        photo: {
-          type: 'string',
-          format: 'binary',
-          nullable: true,
-        },
-      },
-    },
-  })
   @UseInterceptors(FileInterceptor('photo'))
   async updateProfile(
     @FUser() user: FirebaseUser,

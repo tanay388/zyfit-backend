@@ -169,6 +169,6 @@ export class DietService {
       }
     }
 
-    return mealPlan;
+    return this.mealPlanRepository.findOne({ where: { id: mealPlan.id } });
   }
 }

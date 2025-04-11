@@ -30,16 +30,12 @@ export class UpdateUserDto {
   @IsString()
   name: string;
 
-  @ApiPropertyOptional({
-    
-  })
+  @ApiPropertyOptional({})
   @IsOptional()
   @IsEnum(MealType)
   dietryPreference: MealType;
 
-  @ApiPropertyOptional({
-
-  })
+  @ApiPropertyOptional({})
   @IsOptional()
   @IsString()
   city: string;
