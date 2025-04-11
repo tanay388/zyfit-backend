@@ -90,6 +90,7 @@ export class UserService {
       bmi: updateUserDto.bmi,
       goalWeight: updateUserDto.goalWeight,
       // issueMuscleGroups: updateUserDto.issueMuscleGroups,
+      dietryPreference: updateUserDto.dietryPreference,
       age: updateUserDto.age,
     });
 
