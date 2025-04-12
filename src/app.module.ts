@@ -15,6 +15,8 @@ import { FirebaseUserMiddlewareExtractor } from './models/user/middleware/fireba
 import { ExercisesModule } from './models/exercises/exercises.module';
 import { AIModule } from './providers/ai/ai.module';
 import { DietModule } from './models/diet/diet.module';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpErrorFilter } from './common/utils/error-log';
 
 @Module({
   imports: [
@@ -41,7 +43,10 @@ import { DietModule } from './models/diet/diet.module';
     DietModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,     {
+    provide: APP_FILTER,
+    useClass: HttpErrorFilter,
+  },],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer): any {
