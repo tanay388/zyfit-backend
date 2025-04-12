@@ -65,7 +65,7 @@ export class MealPlanService {
               {
                 role: 'system',
                 content:
-                  'You are a professional nutritionist. Generate personalized meal plans based on user profiles, dietary preferences, and available food items. IMPORTANT: You must ONLY return a valid JSON object without any additional text or explanation.',
+                  'You are a professional nutritionist. Generate personalized meal plans based on user profiles, dietary preferences, and available food items. Please keep in mind to not recommend non-veg items more than 1 time a day and 2 days a week. Also include atleast 1 food food suitable for summer season and regional to Jharkhand, Bihar. IMPORTANT: You must ONLY return a valid JSON object without any additional text or explanation.',
               },
               {
                 role: 'user',
