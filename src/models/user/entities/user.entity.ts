@@ -41,7 +41,7 @@ export enum PrimaryGoal {
 
 export enum BodyShapes {
   slim = 'Slim',
-  average = 'Average',
+  average = 'Average (Fit)',
   athletic = 'Athletic',
   muscular = 'Muscular',
   bodybuilder = 'Bodybuilder',
