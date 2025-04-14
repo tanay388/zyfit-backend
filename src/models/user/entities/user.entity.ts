@@ -43,6 +43,7 @@ export enum BodyShapes {
   slim = 'Slim',
   average = 'Average (Fit)',
   athletic = 'Athletic',
+  athletic_fit = 'Athletic (Fit)',
   muscular = 'Muscular',
   bodybuilder = 'Bodybuilder',
   heavy = 'Heavy',
