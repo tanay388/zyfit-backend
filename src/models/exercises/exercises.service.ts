@@ -55,7 +55,9 @@ export class ExercisesService {
       aiResponse,
     );
 
-    return workoutPlan;
+    return await WorkoutPlan.findOne({
+      where: { id: workoutPlan.id },
+    });
   }
 
   findAll() {
